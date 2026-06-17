@@ -2,51 +2,40 @@ local wezterm = require("wezterm")
 
 local M = {}
 
---------------------------------------------------------------------------------
--- 私有小工具
---------------------------------------------------------------------------------
+local function create_dev_layout(window, pane)
+	local tab = pane:tab()
 
--- 切换 tab bar 显示状态
--- 你的 appearance.lua 里已经设置了：
---   hide_tab_bar_if_only_one_tab = true
---   use_fancy_tab_bar = false
--- 这里通过 overrides 做“临时强制显示 / 恢复默认策略”
-local function toggle_tab_bar(window)
-	local overrides = window:get_config_overrides() or {}
-
-	local is_forced_visible = overrides.enable_tab_bar == true and overrides.hide_tab_bar_if_only_one_tab == false
-
-	if is_forced_visible then
-		-- 恢复到配置文件里的默认行为
-		overrides.enable_tab_bar = nil
-		overrides.hide_tab_bar_if_only_one_tab = nil
-	else
-		-- 强制显示 tab bar
-		overrides.enable_tab_bar = true
-		overrides.hide_tab_bar_if_only_one_tab = false
+	-- 已经分过 pane 就不重复创建
+	if #tab:panes() > 1 then
+		pane:activate()
+		window:perform_action(wezterm.action.SendString("nvim .\r"), pane)
+		return
 	end
 
-	window:set_config_overrides(overrides)
+	local cwd = pane:get_current_working_dir()
+
+	-- 右侧 shell，占 35%，左边自然剩 65%
+	local right_top = pane:split({
+		direction = "Right",
+		size = 0.35,
+		cwd = cwd,
+	})
+
+	-- 右侧上下对半分
+	right_top:split({
+		direction = "Bottom",
+		size = 0.5,
+		cwd = cwd,
+	})
+
+	-- 回到左边，自动打开 nvim .
+	pane:activate()
+	window:perform_action(wezterm.action.SendString("nvim .\r"), pane)
 end
 
--- 清空所有运行时 overrides
--- 比如你后面临时切过主题、临时改过 tab bar 显示状态，
--- 都可以一把恢复回配置文件默认值
-local function reset_ui_overrides(window)
-	window:set_config_overrides({})
-end
-
---------------------------------------------------------------------------------
--- 主入口
---------------------------------------------------------------------------------
-
-function M.apply(_config)
-	wezterm.on("toggle-tab-bar", function(window, _pane)
-		toggle_tab_bar(window)
-	end)
-
-	wezterm.on("reset-ui-overrides", function(window, _pane)
-		reset_ui_overrides(window)
+function M.setup()
+	wezterm.on("create-dev-layout", function(window, pane)
+		create_dev_layout(window, pane)
 	end)
 end
 

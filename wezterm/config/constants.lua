@@ -115,6 +115,20 @@ M.PROJECTS = {
 		workspace = "ch395",
 	},
 	{
+		label = "PowerShell - CPrj_gd32f103",
+		-- args = { "pwsh.exe", "-NoLogo", "-NoProfile" },
+		args = { "pwsh.exe", "-NoLogo" },
+		cwd = "F:/OneDrive/00_work/gd32",
+		workspace = "gd32",
+	},
+	{
+		label = "PowerShell - mcu_module",
+		-- args = { "pwsh.exe", "-NoLogo", "-NoProfile" },
+		args = { "pwsh.exe", "-NoLogo" },
+		cwd = "F:/OneDrive/00_work/mcu_module",
+		workspace = "mcu_module",
+	},
+	{
 		label = "PowerShell - config_Wezterm",
 		-- args = { "pwsh.exe", "-NoLogo", "-NoProfile" },
 		args = { "pwsh.exe", "-NoLogo" },

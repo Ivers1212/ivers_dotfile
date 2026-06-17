@@ -6,6 +6,9 @@
 
 local wezterm = require("wezterm")
 local config = wezterm.config_builder()
+local events = require("config.events")
+
+events.setup()
 
 local modules = {
 	"config.fonts",

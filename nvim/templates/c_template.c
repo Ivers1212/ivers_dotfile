@@ -1,39 +1,34 @@
-/* 文件名: <module_name>.c
- * 描述: <简要描述该模块的功能和用途>
+/* 文件名:
+ * 描述:
  *
  * 边界:
- * 1. 该模块实现了 <模块功能描述>。
- * 2. 仅限于在当前模块内部使用的功能通过私有函数和变量进行封装。
- * 3. 对外提供公共API接口供其他模块调用。
+ * 1.
+ * 2.
+ * 3.
  */
 
 /* Private includes
  * **************************************************************/
-#include "module_name.h" // 包含与本文件相关的头文件，暴露公共接口
-#include <stdbool.h>     // 布尔类型
-#include <stdint.h>      // 标准整数类型
 
 /* Private define
  * **************************************************************/
 /* 宏定义 - 根据需求设置 */
-#define
 
 /* Private typedef
  * **************************************************************/
 /* 可用于内部的结构体或类型定义 */
-typedef struct {
-
-} stuct_name;
+// typedef struct {
+//
+// } stuct_name;
 
 /* Private variable
  * **************************************************************/
 /* 文件内私有变量，使用 static 限制作用域 */
-static uint8_t variable_name; // 数据缓冲区
+// static uint8_t variable_name; // 数据缓冲区
 
 /* Private function prototypes
  * **************************************************************/
 /* 声明本模块内部函数，不对外公开 */
-static void PrivateValname(void);
 
 /* Private function definitions
  * **************************************************************/
@@ -42,11 +37,10 @@ static void PrivateValname(void);
 /* Public APIs
  * **************************************************************/
 /* 对外提供的公共API接口函数 */
-void PubFunc(void) {}
 
 /* Weak hook override
  * **************************************************************/
 /* 如果需要，用户可以在其他地方覆盖这些钩子函数 */
-__attribute__((weak)) void custom_callback(void) {
-  // 默认空实现，用户可以重写
-}
+// __attribute__((weak)) void custom_callback(void) {
+//   // 默认空实现，用户可以重写
+// }

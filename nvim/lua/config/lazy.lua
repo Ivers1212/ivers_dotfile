@@ -1,3 +1,4 @@
+-- 检查本地是否存在 lazy.vim , 没有就从Github clone下来
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -12,8 +13,11 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
     os.exit(1)
   end
 end
+
+-- 将 lazy.nvim 加进 Neovim 的运行路径
 vim.opt.rtp:prepend(lazypath)
 
+-- 调用 lazy
 require("lazy").setup({
   spec = {
     -- add LazyVim and import its plugins
